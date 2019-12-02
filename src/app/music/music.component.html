@@ -1,0 +1,65 @@
+<div class="window-margin">
+    <div id="window" class="window">
+
+        <div id="main1" class="main" role="main">
+
+            <div class="featured-movie">
+                <ngb-carousel #carousel interval="2000" [pauseOnHover]="pauseOnHover">
+                    <div *ngFor="let music of musics | slice:0:5;">
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper" (click)="displayMusic(music.id)">
+                                <div #album *ngIf="type == 'art'; else track">
+                                    <img 
+                                        src="https://api.napster.com/imageserver/v2/artists/{{ music.id }}/images/500x500.jpg"
+                                        alt="poster" width="100%" height="650">
+                                </div>
+                                <ng-template #track>
+                                    <img src="https://api.napster.com/imageserver/v2/albums/{{ music.albumId }}/images/500x500.jpg"
+                                        alt="poster" width="100%" height="650">
+                                </ng-template>
+                            </div>
+                            <div class="carousel-caption bg-dark" style="opacity: 0.8;" (click)="displayMusic(music.id)">
+                                <h3>{{ music.name }}</h3>
+                            </div>
+                        </ng-template>
+                    </div>
+                </ngb-carousel>
+            </div> <!-- featured -->
+
+
+            <div class="movie-list">
+                <div class="title-bar">
+                    <div class="left text-dark">
+                        <p (click)="changeContent('art')" class="bold">Top Artist</p>
+                        <p (click)="changeContent('tra')" class="bold">Top Tracks</p>
+                    </div> <!-- left -->
+                </div> <!-- title-bar -->
+
+                <ul class="list">
+                    <div class="animate" *ngFor="let music of musics">
+                        <li (click)="displayMusic(music.id)">
+                            <div *ngIf="type == 'art', else track">
+                                <img src="https://api.napster.com/imageserver/v2/artists/{{ music.id }}/images/150x100.jpg"
+                                    alt="" class="cover" />
+                                <p class="title">{{ music.name }}</p>
+                            </div>
+                            <ng-template #track>
+                                <img src="https://api.napster.com/imageserver/v2/albums/{{ music.albumId }}/images/150x100.jpg"
+                                    alt="" class="cover" />
+                                <p class="title">{{ music.name }}</p>
+                                <p class="genre">{{ music.artistName }}</p>
+                            </ng-template>
+                        </li>
+                    </div>
+                </ul>
+
+                <a id="showMore" class="load-more" (click)="showMoreMusic()">Show more movies <span
+                        class="fa fa-plus"></span></a>
+
+            </div> <!-- movie list -->
+
+
+        </div> <!-- main -->
+
+    </div> <!-- window -->
+</div> <!-- window margin -->

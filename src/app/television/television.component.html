@@ -1,0 +1,52 @@
+<div class="window-margin">
+    <div id="window" class="window">
+
+        <div id="main1" class="main" role="main" >
+
+            <div class="featured-movie">
+                <ngb-carousel #carousel interval="2000" [pauseOnHover]="pauseOnHover">
+                    <div *ngFor="let show of shows | slice:0:5;">
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper" (click)="displayShow(show.id)">
+                                <img src="https://image.tmdb.org/t/p/original/{{ show.poster_path }}" alt="poster"
+                                    width="100%" height="650">
+                            </div>
+                            <div class="carousel-caption bg-dark" style="opacity: 0.8;" (click)="displayShow(show.id)">
+                                <h3>{{ show.name }}</h3>
+                                <p>{{ show.overview }}</p>
+                            </div>
+                        </ng-template>
+                    </div>
+                </ngb-carousel>
+            </div> <!-- featured -->
+
+
+            <div class="movie-list">
+                <div class="title-bar">
+                    <div class="left">
+                        <p (click)= "changeContent('pop')" class="bold">Popular</p>       
+                        <p (click)= "changeContent('air')" class="bold">On the air</p>
+                        <p (click)= "changeContent('rat')" class="bold">Top Rated</p>
+                    </div> <!-- left -->
+                </div> <!-- title-bar -->
+
+                <ul class="list">
+                    <div class="animate" *ngFor="let show of shows">
+                        <li  (click)=displayShow(show.id)>
+                            <img src="https://image.tmdb.org/t/p/w154/{{ show.poster_path }}" alt="" class="cover" />
+							<p class="title">{{ show.name }}</p>
+							<p class="genre">{{ show.vote_average }}</p>
+                        </li>
+                    </div>
+                </ul>
+
+                <a id="showMore" class="load-more" (click)="showMoreMusic()">Show more movies <span
+                        class="fa fa-plus"></span></a>
+
+            </div> <!-- movie list -->
+
+
+        </div> <!-- main -->
+
+    </div> <!-- window -->
+</div> <!-- window margin -->

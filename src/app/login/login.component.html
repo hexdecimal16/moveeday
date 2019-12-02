@@ -1,0 +1,55 @@
+<div *ngIf="auth.user | async as user; else login">
+        <div class="container">
+          <div class="row">
+            <div class="modalbox success col-sm-8 col-md-6 col-lg-5 center animate">
+              <div class="icon">
+                <span class="fa fa-check fa-4x"></span>
+              </div>
+              <!--/.icon-->
+              <h1>Success!</h1>
+              <p>You have successfully logged into the site
+                <br>enjoy all cool feature.</p>
+              <button type="button" class="redo btn" (click)="close()">Ok</button>
+            </div>
+            <!--/.success-->
+          </div>
+        </div>
+      </div>
+      
+      <ng-template #login>
+        <div class="form-modal">
+      
+          <div class="form-toggle">
+            <button id="login-toggle" (click)="toggleLogin()">Log in</button>
+            <button id="signup-toggle" (click)="toggleSignup()">Sign up</button>
+          </div>
+      
+          <div id="login-form">
+            <form>
+              <input type="text" placeholder="Enter email" id="email1"/>
+              <input type="password" placeholder="Enter password" id="password1"/>
+              <button type="button" class="btn login" (click)="loginWithEmail()">login</button>
+              <hr/>
+              <button type="button" class="btn -box-sd-effect" (click)="auth.googleLogin()"> <i class="fa fa-google fa-lg" aria-hidden="true"></i> sign in with google</button>
+            </form>
+          </div>
+      
+          <div id="signup-form">
+            <form>
+              <input type="email" placeholder="Enter your email" id="email"/>
+              <div style="display: flex">
+                <input type="text" (keyup)="submit()" name="username" placeholder="Choose username" id="username" [(ngModel)]="text"/>
+                <img id="avatar" [src]="identicon" style="display: none">
+              </div>
+              <input type="password" placeholder="Create password" id="password"/>
+              <button type="button" class="btn signup" (click)="signup()">create account</button>
+              <p>Clicking <strong>create account</strong> means that you are agree to our <a>terms of services</a>.</p>
+              <hr/>
+              <button type="button" class="btn -box-sd-effect" (click)="auth.googleLogin()"> <i class="fa fa-google fa-lg" aria-hidden="true"></i> sign up with google</button>
+            </form>
+          </div>
+      
+        </div>
+      
+      </ng-template>
+      

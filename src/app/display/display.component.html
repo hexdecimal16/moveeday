@@ -1,0 +1,89 @@
+<div class="background" [ngStyle]="{'background-image': 'url(' + this.url + ' )'}"></div>
+
+<div class="movie" id="mov">
+    <div class="wrapper movie">
+        <div class="main_card">
+            <div class="card_left">
+                <div class="card_datails">
+                    <h1 class="title">{{ display['title'] }}</h1>
+                    <div class="card_cat">
+                        <p class="PG" id="status">{{ display['status'] }}</p>
+                        <p class="year">{{ date }}</p>
+                        <div *ngFor="let genre of display['genres']; let i = index">
+                            <p *ngIf="i < 2" class="genre"> {{ genre.name }}</p>
+                        </div>
+                        <p class="time">{{ display['original_language'] }}</p>
+                    </div>
+                    <p class="disc">{{ display['overview'] }}</p>
+                </div>
+            </div>
+            <div class="card_right">
+                <div class="img_container">
+                    <source srcset="https://image.tmdb.org/t/p/w154/{{ display['poster_path'] }}"
+                        media="(max-width: 1300px)">
+                    <source srcset="https://image.tmdb.org/t/p/w300/{{ display['poster_path'] }}"
+                        media="(max-width: 3100px)">
+                    <source srcset="assets/images/inception.jpg">
+                    <img class="thumbnail" src="http://image.tmdb.org/t/p/w300/{{ display['poster_path'] }}" alt="poster">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="show" id="sho">
+    <div class="wrapper movie">
+        <div class="main_card">
+            <div class="card_left">
+                <div class="card_datails">
+                    <h1 class="title">{{ display['name'] }}</h1>
+                    <div class="card_cat">
+                        <p class="PG" id="status">{{ display['status'] }}</p>
+                        <p class="year">{{ date }}</p>
+                        <div *ngFor="let genre of display['genres']; let i = index">
+                            <p *ngIf="i < 2" class="genre"> {{ genre['name'] }}</p>
+                        </div>
+                        <p class="time">{{ display['original_language'] }}</p>
+                    </div>
+                    <p class="disc">{{ display['overview'] }}</p>
+                </div>
+            </div>
+            <div class="card_right">
+                <div class="img_container">
+                    <source srcset="https://image.tmdb.org/t/p/w154/{{ display['poster_path'] }}"
+                        media="(max-width: 1300px)">
+                    <source srcset="https://image.tmdb.org/t/p/w300/{{ display['poster_path'] }}"
+                        media="(max-width: 3100px)">
+                    <source srcset="assets/images/inception.jpg">
+                    <img class="thumbnail" src="http://image.tmdb.org/t/p/w300/{{ display['poster_path' ]}}" alt="poster">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="music" id="mus">
+    <div class="wrapper movie">
+        <div class="main_card">
+            <div class="card_left"> 
+                <div class="card_datails">
+                    <h1 class="title">{{ display['name'] }}</h1>
+                    <div class="card_cat">
+                        <p class="PG" id="status">{{ display['artistName'] }}</p>
+                        <p class="year">{{ date }}</p>
+                        <div *ngFor="let genre of display['genres']; let i = index">
+                            <p *ngIf="i < 2" class="genre"> {{ genre.name }}</p>
+                        </div>
+                        <p class="time">{{ display['original_language'] }}</p>
+                    </div>
+                    <p class="disc" *ngIf="artist['bios'] != null "></p>
+                </div>
+            </div>
+            <div class="card_right">
+                <div class="img_container">
+                    <img class="thumbnail" src="{{ musicImage }}" alt="poster">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

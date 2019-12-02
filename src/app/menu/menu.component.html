@@ -1,0 +1,119 @@
+<div class="window-margin">
+    <div id="window" class="window">
+
+        <aside id="mySidebar" class="sidebar">
+            <div class="top-bar">
+                <p class="logo">MoveeDay</p>
+            </div>
+            <div class="add" id="add">
+                <h4 class="text-dark" style="margin-top: 2vw; text-align: center;">Search</h4>
+                <div class="search-box">
+                    <input class="search" type="text" placeholder="Search. . ." (keyup)="search()" name="search"
+                        [(ngModel)]="term">
+                    <span class="search-span"></span>
+                </div>
+                <div class="result">
+                    <tbody class="result-table" *ngFor="let result of results | slice:0:5;">
+                        <tr *ngIf="type == '/home'">
+                            <td>
+                                <img *ngIf="result.poster_path != null" class="icon"
+                                    src="http://image.tmdb.org/t/p/w45/{{ result.poster_path }}" alt="icon">
+                            </td>
+                            <td>
+                                <h4 id="title" class="title">{{ result.title }}</h4>
+                            </td>
+                        </tr>
+                        <tr *ngIf="type == '/television'">
+                            <td>
+                                <img *ngIf="result.poster_path != null" class="icon"
+                                    src="http://image.tmdb.org/t/p/w45/{{ result.poster_path }}" alt="icon">
+                            </td>
+                            <td>
+                                <h4 id="title" class="title">{{ result.name }}</h4>
+                            </td>
+                        </tr>
+                        <tr *ngIf="type == '/music'">
+                            <td>
+                                <img *ngIf="result.albumId != null" class="icon"
+                                    src="https://api.napster.com/imageserver/v2/albums/{{ result.albumId }}/images/70x47.jpg"
+                                    alt="icon" width="100" height="100">
+                            </td>
+                            <td>
+                        <tr>
+                            <h4 id="title" class="title">{{ result.name }}</h4>
+                        </tr>
+                        <tr>
+                            <p class="artist">{{ result.artistName }}</p>
+                        </tr>
+                        </td>
+                        </tr>
+                    </tbody>
+                </div>
+                <table class="nav">
+                    <tbody>
+                        <td>
+                    <tr><a disable=true routerLink="/television" (click)="showPanel()">Television</a></tr>
+                    <tr><a routerLink="/music" (click)="showPanel()">Music</a></tr>
+                </td>
+                </tbody>
+                </table>
+            </div>
+        </aside>
+
+
+        <div id="main" class="main" role="main">
+
+            <div class="top-bar">
+
+                <div class="profile-box">
+                    <ul class="nav" style="list-style-type: none;" *ngIf="auth.user | async as user; else login">
+                        <div ngbDropdown class="d-inline-block">
+                            <a id="dropdownBasic1" ngbDropdownToggle><img class="circle" [src]="user.photoURL"></a>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a class="nav-link disabled" routerLink="/">{{ user.displayName }}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="nav-link" (click)="logout()">Logout</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </ul>
+                    <ng-template #login>
+                        <ul class="nav">
+                            <li class="nav-item login" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">
+                                <a class="nav-item text-light" routerLink="/login">Login</a>
+                            </li>
+                        </ul>
+                    </ng-template>
+                </div>
+
+                <ul class="top-menu">
+                    <li (click)="showPanel()" id='sidebar' class="menu-icon trigger-sidebar-toggle">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </li>
+                    <li routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>Movies & Films</a></li>
+                    <li routerLink="/television" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>Television</a></li>
+                    <li routerLink="/music" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>Music</a></li>
+                </ul>
+
+            </div> <!-- top bar -->
+
+        </div> <!-- main -->
+
+    </div> <!-- window -->
+</div> <!-- window margin -->
